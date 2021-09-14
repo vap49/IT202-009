@@ -8,6 +8,6 @@
 =======
 IT202 FALL 2021
 Section: 009
-Name: Villaire Pierre
+Name: Villaire Pierre.
 Brief Description: I am a Junior Computer Science student. I like cars, tech, and soccer. 
 >>>>>>> 85350709d6a72d66bb4e653b7380d3e58190d0c1
