@@ -8,13 +8,21 @@
         window.addEventListener("load", () => {
             console.log("loaded via javascript");
             //TODO: add any extra onload processing you may need here
-
+            getCurrentSelection()
         });
         function getCurrentSelection() {
             setTimeout(() => {
                 //added this delay here as some solutions may require it to update properly (i.e., click code may complete before the navigation changes)
                 //TODO: add code for processing the current selection 
-                
+                var tagLines = document.getElementsByTagName('a');
+                var h1 = document.getElementsByTagName("h1")[0];
+                for (var i = 0; i < tagLines.length; i++)
+                {
+                    tagLines[i].onclick = function(){
+                        document.title = this.innerText;
+                        h1.innerText = this.innerText;
+                    }
+                }
                 //Note: likely you'll want to call updateCurrentPage towards the end
             }, 100);
         }
