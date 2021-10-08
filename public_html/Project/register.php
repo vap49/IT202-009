@@ -54,19 +54,20 @@ if (isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm
         array_push($errors, "Passwords must match");
     }
     if (count($errors) > 0) {
-        echo "<pre>" . var_export($errors, true) . "</pre>";
+        flash ("<pre>" . var_export($errors, true) . "</pre>");
     } else {
-        echo "Welcome, $email";
+        flash ("Welcome, $email");
         $hash = password_hash($password, PASSWORD_BCRYPT);
         $db = getDB();
         $stmt = $db->prepare("INSERT INTO Users (email, password) VALUES(:email, :password)");
         try {
             $stmt->execute([":email" => $email, ":password" => $hash]);
-            echo "You've registered, yay...";
+            flash ("You've registered, yay...");
         } catch (Exception $e) {
-            echo "There was a problem registering";
-            echo "<pre>" . var_export($e, true) . "</pre>";
+            flash ("There was a problem registering");
+            flash ("<pre>" . var_export($e, true) . "</pre>");
         }
     }
 }
 ?>
+<?php require(__DIR__ . "/../../partials/flash.php");?>
