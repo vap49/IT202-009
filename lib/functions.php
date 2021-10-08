@@ -93,3 +93,4 @@ function getMessages()
     }
     return array();
 }
+
