@@ -46,7 +46,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
         array_push($errors, "Password must be 8 or more characters");
     }
     if (count($errors) > 0) {
-        echo "<pre>" . var_export($errors, true) . "</pre>";
+        flash("<pre>" . var_export($errors, true) . "</pre>");
     } else {
         //TODO 4
         $db = getDB();
@@ -59,19 +59,21 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
                     $hash = $user["password"];
                     unset($user["password"]);
                     if (password_verify($password, $hash)) {
-                        echo "Weclome $email";
+                        flash("Weclome $email");
                         $_SESSION["user"] = $user;
                         die(header("Location:home.php"));
                     } else {
-                        echo "Invalid password";
+                        flash("Invalid password");
                     }
                 } else {
-                    echo "Invalid email";
+                    flash("Invalid email");
                 }
             }
         } catch (Exception $e) {
-            echo "<pre>" . var_export($e, true) . "</pre>";
+            flash("<pre>" . var_export($e, true)) . "</pre>";
         }
     }
 }
 ?>
+
+<?php require(__DIR__ . "/../../partials/flash.php");?>
