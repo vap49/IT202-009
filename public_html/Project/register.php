@@ -77,6 +77,7 @@ if (isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm
         try {
             $stmt->execute([":email" => $email, ":password" => $hash]);
             flash("You've registered, yay...");
+            die(header("Location: login.php"));
         } catch (Exception $e) {
             flash("There was a problem registering");
             flash("<pre>" . var_export($e, true) . "</pre>");
