@@ -1,4 +1,12 @@
+<canvas id="canvas" width="600" height="400" tabindex="1"></canvas>
 
+#canvas {
+    width: 600px;
+    height: 400px;
+    border: 1px solid black;
+  }
+
+<script>
 // Collect The Square game
 
 // Get a reference to the canvas DOM element
@@ -26,10 +34,35 @@ var targetX = 0;
 var targetY = 0;
 var targetLength = 25;
 
+// Game Music
+function sound(src) {
+  this.sound = document.createElement("audio");
+  this.sound.src = src;
+  this.sound.setAttribute("preload", "auto");
+  this.sound.setAttribute("controls", "none");
+  this.sound.style.display = "none";
+  document.body.appendChild(this.sound);
+  this.play = function(){
+    this.sound.play();
+  }
+  this.stop = function(){
+    this.sound.pause();
+  }
+}
+
+ var backgroundMusic = new sound("Monkeys-Spinning-Monkeys.mp3");
+ var collisionMusic = new sound("Smash.mp3");
+ var powerupMusic = new sound("8d82b5_Super_Mario_Bros_Power_Up_Sound_Effect.mp3");
+ 
 // Determine if number a is within the range b to c (exclusive)
 function isWithin(a, b, c) {
   return (a > b && a < c);
 }
+
+// Flags for Powerups
+var active_Powerup = false;
+var powerUp_timer = 5;
+var timer = null; // track the powerup timer countdown
 
 // Countdown timer (in seconds)
 var countdown = 30;
@@ -72,6 +105,45 @@ canvas.addEventListener('keyup', function(event) {
   }
 });
 
+function powerUp() {
+  if (active_Powerup){
+  	if (powerUp_timer <=0){ // end of powerup timer, reset all values
+        clearInterval(timer);
+    	active_Powerup = false;
+        powerUp_timer = 5;
+        speed = 5;
+        sideLength = 50;
+    }
+    else{}
+  }
+  else{ // No active PowerUp
+      let choose = Math.floor(Math.random() * (3 - 0) + 0); // random number between 0 and 3
+        if (choose != 0) { // select powerup 1 = speedboost, 2 = big square
+            active_Powerup = true;
+            timer = setInterval(function() {
+			    powerUp_timer--;
+			}, 1000)
+            powerupMusic.play();
+            switch(choose){
+              case 1:
+                //context.fillStyle = '#000000';
+  				//context.font = '12px Arial';
+  				//context.textAlign = 'center';
+  				//context.fillText('SPPPEEEEEED BOOOOOOST!!');
+                speed = 12;
+                break;
+              case 2:
+                //context.fillStyle = '#000000';
+  				//context.font = '12px Arial';
+  				//context.textAlign = 'center';
+  				//context.fillText('BIIIIIIIG SQUAAAAAARE!!');
+                sideLength = 75;
+                break;
+            }
+        }
+    }
+}
+
 // Show the start menu
 function menu() {
   erase();
@@ -89,21 +161,23 @@ function menu() {
 
 // Start the game
 function startGame() {
-	// Reduce the countdown timer ever second
+    // Start Music
+    backgroundMusic.play();
+  // Reduce the countdown timer ever second
   id = setInterval(function() {
     countdown--;
   }, 1000)
   // Stop listening for click events
   canvas.removeEventListener('click', startGame);
   // Put the target at a random starting point
-	moveTarget();
+  moveTarget();
   // Kick off the draw loop
   draw();
 }
 
 // Show the game over screen
 function endGame() {
-	// Stop the countdown
+  // Stop the countdown
   clearInterval(id);
   // Display the final score
   erase();
@@ -157,6 +231,10 @@ function draw() {
   // Collide with the target
   if (isWithin(targetX, x, x + sideLength) || isWithin(targetX + targetLength, x, x + sideLength)) { // X
     if (isWithin(targetY, y, y + sideLength) || isWithin(targetY + targetLength, y, y + sideLength)) { // Y
+      // play collision sound
+      collisionMusic.play();
+      // apply random powerup  CHANGE FOR HTML5 HW
+      powerUp();
       // Respawn the target
       moveTarget();
       // Increase the score
@@ -186,3 +264,5 @@ function draw() {
 // Start the game
 menu();
 canvas.focus();
+
+</script>
