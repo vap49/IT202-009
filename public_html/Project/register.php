@@ -69,10 +69,6 @@ if (isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm
         flash("Confirm password must not be empty", "danger");
         $hasError = true;
     }
-    if (empty($username)){
-        flash("Username is required","danger");
-        $hasError = true;
-    }
     if (strlen($password) < 8) {
         flash("Password too short", "danger");
         $hasError = true;
@@ -92,8 +88,7 @@ if (isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm
             $stmt->execute([":email" => $email, ":password" => $hash, ":username" => $username]);
             flash("Successfully registered!");
         } catch (Exception $e) {
-            flash("There was a problem registering", "danger");
-            //flash("<pre>" . var_export($e, true) . "</pre>", "danger");
+            users_check_duplicate($e->errorInfo);
         }
     }
 }
