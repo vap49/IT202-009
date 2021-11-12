@@ -88,8 +88,7 @@ if (isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm
             $stmt->execute([":email" => $email, ":password" => $hash, ":username" => $username]);
             flash("Successfully registered!");
         } catch (Exception $e) {
-            flash("There was a problem registering", "danger");
-            flash("<pre>" . var_export($e, true) . "</pre>", "danger");
+            users_check_duplicate($e->errorInfo);
         }
     }
 }
