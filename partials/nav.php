@@ -51,9 +51,9 @@ require_once(__DIR__ . "/../lib/functions.php");
                             Admin Roles
                         </a>
                         <ul class="dropdown-menu bg-warning" aria-labelledby="rolesDropdown">
-                            <li><a class="dropdown-item" href="<?php echo get_url('admin/create_role.php'); ?>">Create</a></li>
-                            <li><a class="dropdown-item" href="<?php echo get_url('admin/list_roles.php'); ?>">List</a></li>
-                            <li><a class="dropdown-item" href="<?php echo get_url('admin/assign_roles.php'); ?>">Assign</a></li>
+                            <li><a class="dropdown-item" href="<?php echo get_url('Admin/create_role.php'); ?>">Create</a></li>
+                            <li><a class="dropdown-item" href="<?php echo get_url('Admin/list_roles.php'); ?>">List</a></li>
+                            <li><a class="dropdown-item" href="<?php echo get_url('Admin/assign_roles.php'); ?>">Assign</a></li>
                         </ul>
                     </li>
                 <?php endif; ?>
