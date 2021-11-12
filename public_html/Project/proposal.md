@@ -23,7 +23,7 @@
 ### Proposal Checklist and Evidence
 
 - Milestone 1
-    - [ ] (10/12/21) User will be able to register a new account
+    - [x] (10/12/21) User will be able to register a new account
   -  List of Evidence of Feature Completion
     - Status: Completed
     - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
