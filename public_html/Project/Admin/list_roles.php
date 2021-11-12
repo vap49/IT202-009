@@ -52,7 +52,7 @@ try {
             <input class="btn btn-primary" type="submit" value="Search" />
         </div>
     </form>
-    <table class="table text-light">
+    <table class="table text-dark">
         <thead>
             <th>ID</th>
             <th>Name</th>
@@ -79,7 +79,7 @@ try {
                                     <?php /* if this is part of a search, lets persist the search criteria so it reloads correctly*/ ?>
                                     <input type="hidden" name="role" value="<?php se($search, null); ?>" />
                                 <?php endif; ?>
-                                <input class="btn btn-warning" type="submit" value="Toggle" />
+                                <input class="btn btn-info" type="submit" value="Toggle" />
                             </form>
                         </td>
                     </tr>
