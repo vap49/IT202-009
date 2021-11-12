@@ -48,7 +48,7 @@
       * Form
           * User can login with **email **or **username**
               * This can be done as a single field or as two separate fields
-          * Password is required
+          * Password is required 
       * User should see friendly error messages when an account either doesn’t exist or if passwords don’t match
       * Logging in should fetch the user’s details (and roles) and save them into the session.
       * User will be directed to a landing page upon login
