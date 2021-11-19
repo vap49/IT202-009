@@ -35,14 +35,19 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
         flash("Email must not be empty", "danger");
         $hasError = true;
     }
-    //sanitize
-    $email = sanitize_email($email);
-    //validate
-    if (!is_valid_email($email)) {
-        //array_push($errors, "Invalid email address");
-        flash("Invalid email address", "warning");
-
-        $hasErrors = true;
+    if (str_contains($email, "@")) {
+        //sanitize
+        $email = sanitize_email($email);
+        //validate
+        if (!is_valid_email($email)) {
+            flash("Invalid email address", "warning");
+            $hasError = true;
+        }
+    } else {
+        if (!preg_match('/^[a-z0-9_-]{3,30}$/i', $email)) {
+            flash("Username must only be alphanumeric and can only contain - or _", "warning");
+            $hasError = true;
+        }
     }
     if (empty($password)) {
         flash("password must not be empty", "danger");
@@ -92,6 +97,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
     }
 }
 ?>
+
 <?php
 require(__DIR__ . "/../../partials/flash.php");
 ?>
