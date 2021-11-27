@@ -69,6 +69,12 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
                     $hash = $user["password"];
                     unset($user["password"]);
                     if (password_verify($password, $hash)) {
+                        // here if user does not already have a cart
+                        // associated with their user id,
+                        // give them one and load in the cart data,
+                        // otherwise, fetch their cart from the database, 
+                        // and load in that cart data.
+                        // copy example from user roles below
                         flash("Welcome $email");
                         $_SESSION["user"] = $user;
                         //lookup potential roles
