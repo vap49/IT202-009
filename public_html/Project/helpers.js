@@ -21,19 +21,20 @@ else ready()
     
 // cart management functions
 function ready(){
+    //for remove from cart in cart
     var remove = document.getElementsByClassName('btn-danger');
     for (var i = 0; i< remove.length; i++){
         var button = remove[i];
         button.addEventListener('click', remove_from_cart)
     }
-
+    //for change quantity slider
     var quantityInputs = document.getElementsByClassName('cart-quantity-input')
     for (var i = 0; i< quantityInputs.length; i++){
         var input = quantityInputs[i]
         input.addEventListener('change',change_Quantity)
     }
-
-    var add_to_cart_buttons = document.getElementsByClassName('shop-item-button')
+    //for add to cart button in shop.php or item_page.php
+    var add_to_cart_buttons = document.getElementsByClassName('btn btn-primary')
     for (var i = 0; i< add_to_cart_buttons.length; i++){
         var button = add_to_cart_buttons[i]
         button.addEventListener('click',add_to_cart)
@@ -45,8 +46,8 @@ function ready(){
 function purchase(){
     flash("Purchase Successful. Thank You!")
     var cartItems = document.getElementsByClassName('cart-items')
-    while (cartItems.hasChildNodes){
-        cartItems.removeChild(cartItems.firstChild)
+    while (cartItems.hasChildNodes()){
+        cartItems.removeChild(cartItems.firstChild())
     }
     update_cart_total()
 }

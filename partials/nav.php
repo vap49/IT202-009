@@ -68,6 +68,18 @@ require_once(__DIR__ . "/../lib/functions.php");
                         </ul>
                     </li>
                 <?php endif; ?>
+                <?php if (has_role("Seller")) : ?>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="rolesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Products
+                        </a>
+                        <ul class="dropdown-menu bg-info" aria-labelledby="rolesDropdown">
+                            <li><a class="dropdown-item" href="<?php echo get_url('Admin/add_items.php'); ?>">Add Products</a></li>
+                            <li><a class="dropdown-item" href="<?php echo get_url('Admin/edit_item.php'); ?>">Edit Products</a></li>
+                            <li><a class="dropdown-item" href="<?php echo get_url('Admin/list_items.php'); ?>">List Products</a></li>
+                        </ul>
+                    </li>
+                <?php endif; ?>
                 <?php if (is_logged_in()) : ?>
                     <li class="nav-item"><a class="nav-link" href="<?php echo get_url('logout.php'); ?>">Logout</a></li>
                 <?php endif; ?>
