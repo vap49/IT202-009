@@ -15,3 +15,9 @@ nav li a,.navbar-brand{
 canvas{
     background-color: white;
 }
+.body{
+    background-color: var(--bs-warning);
+}
+.title{
+    text-decoration: none;
+}
