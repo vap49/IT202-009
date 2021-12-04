@@ -1,5 +1,6 @@
 <?php
 session_start();
+// save cart data to db before unset and destroy session
 session_unset();
 session_destroy();
 session_start();
