@@ -28,7 +28,7 @@ function ready(){
         button.addEventListener('click', remove_from_cart)
     }
     //for change quantity slider
-    var quantityInputs = document.getElementsByClassName('cart-quantity-input')
+    var quantityInputs = document.getElementsByClassName('cart-item-id') //in the html any div tag displaying product id will have this class
     for (var i = 0; i< quantityInputs.length; i++){
         var input = quantityInputs[i]
         input.addEventListener('change',change_Quantity)
@@ -91,7 +91,7 @@ function addItemToCart(title,price,image){
     cart_row.getElementsByClassName('cart-quantity-input')[0].addEventListener('change',change_Quantity)
 }
 
-function change_Quantity(event){
+function change_Quantity(event){ 
     var input = event.target
     if (isNaN(input.value) || input.value < 0){
         input.value = 0
