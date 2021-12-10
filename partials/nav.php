@@ -66,6 +66,7 @@ require_once(__DIR__ . "/../lib/functions.php");
                             <li><a class="dropdown-item" href="<?php echo get_url('Admin/add_items.php'); ?>">Add Products</a></li>
                             <li><a class="dropdown-item" href="<?php echo get_url('Admin/edit_item.php'); ?>">Edit Products</a></li>
                             <li><a class="dropdown-item" href="<?php echo get_url('Admin/list_items.php'); ?>">List Products</a></li>
+                            <li><a class="dropdown-item" href="<?php echo get_url('Admin/orders.php'); ?>">Orders</a></li>
                         </ul>
                     </li>
                 <?php endif; ?>
