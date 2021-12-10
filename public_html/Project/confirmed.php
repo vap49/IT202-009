@@ -11,7 +11,7 @@
     $payment = $_POST['pay'];
     $db = getDB();
     $user_id = get_user_id();
-    $query3 = "SELECT * FROM Products JOIN cart on cart.product_id = Products.id and user_id = $user_id and quantity > 0";
+    $query3 = "SELECT * FROM Products JOIN cart on cart.product_id = Products.id and user_id = $user_id and desired_quantity > 0";
     $products = [];
     $stmt3 = $db->prepare($query3);
     $status = true;
@@ -31,9 +31,9 @@
             break;
         }
         // check cart desired_quanity < stock
-        if (se($p, "quantity", "", false) > se($p, "stock", "", false)) {
+        if (se($p, "desired_quantity", "", false) > se($p, "stock", "", false)) {
             $prodName = (string) se($p, "name", "", false);
-            $quantity = (string) se($p, "quantity", "", false);
+            $quantity = (string) se($p, "desired_quantity", "", false);
             $quantity2 = (string) se($p, "stock", "", false);
             $errMSG = "You are trying to order '" . $prodName . "' but we currently do not have enough stock for the desired quantity of " . $quantity . " We only have " . $quantity2;
             flash("$errMSG");
@@ -85,7 +85,7 @@
         // copy cart details into the orderItems tables with the ORDER ID
         foreach ($results as $item) {
             $prodID = (int) se($item, "product_id", "", false);
-            $cartQuant = (int) se($item, "quantity", "", false);
+            $cartQuant = (int) se($item, "desired_quantity", "", false);
             $price = (int) se($item, "unit_cost", "", false);
             $query4 = "INSERT INTO orderItems (order_id, product_id, quantity, unit_cost) VALUES ('$lastID','$prodID','$cartQuant','$price')";
 
