@@ -57,4 +57,10 @@ try {
         margin-left: auto;
         margin-right: auto;
     }
+td,th {
+        border: 1px solid black;
+        padding: 5px 15px;
+        justify-items: center;
+        color: #543855;
+    }
 </style>
