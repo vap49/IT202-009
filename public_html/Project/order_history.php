@@ -17,7 +17,7 @@ try {
         $orders = $r;
     }
 } catch (PDOException $e) {
-    flash("Orders Query Doesn't Work");
+    flash("Something Broke Here");
 }
 ?>
 <h3 align = "center"> Your Orders</h3>
@@ -26,35 +26,20 @@ try {
 <?php else : ?>
     <table class = "userHist" style="width:50%";>
         <tr>
-            <th style="font-size: 20px; color: black;">Id</th>
-            <th style="font-size: 20px; color: black;">User ID</th>
-            <th style="font-size: 20px; color: black;">Address</th></b>
-            <th style="font-size: 20px; color: black;">Payment</th></b>
-            <th style="font-size: 20px; color: black;">Date Purchased</th></b>
-            <th style="font-size: 20px; color: black;">Order Details</th></b>
+            <th >Id</th>
+            <th >User ID</th>
+            <th >Address</th></b>
+            <th >Payment</th></b>
+            <th >Date Purchased</th></b>
+            <th >Details</th></b>
         </tr>
         <?php foreach ($orders as $item) : ?>
             <tr>
                 <th><?php se($item, "id") ?></th>
                 <th><?php se($item, "user_id") ?></th>
                 <th><?php se($item, "address") ?></th>
-                <th><?php
-                    $pay = (int) se($item, "payment_method", "", false);
-                    switch ($pay) {
-                        case 1:
-                            echo "Visa";
-                            break;
-                        case 2:
-                            echo "Amex";
-                            break;
-                        case 3:
-                            echo "Mastercard";
-                            break;
-                        case 4:
-                            echo "Cash";
-                    }
-                    ?></th>
-                <th><?php se($item,"created");?></th>
+                <th><?php se($item, "payment_method") ?></th>
+                <th><?php se($item, "created");?></th>
                 <th>
                     <a href="<?php  
                     $full = (string) get_url("order_details.php") . "?id=" . (int) se($item, "id","",false);
@@ -67,3 +52,9 @@ try {
 <?php endif; ?>
 
 <!-- Style here -->
+<style>
+      .userHist {
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
