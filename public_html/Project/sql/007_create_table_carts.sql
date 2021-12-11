@@ -1,14 +1,10 @@
 CREATE TABLE IF NOT EXISTS `cart` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,
-  `user_id` BIGINT NULL DEFAULT NULL,
-  `sessionId` VARCHAR(100) NOT NULL,
-  `token` VARCHAR(100) NOT NULL,
-  `status` SMALLINT(6) NOT NULL DEFAULT 0,
-  `createdAt` DATETIME NOT NULL,
-  `updatedAt` DATETIME NULL DEFAULT NULL,
-  `content` TEXT NULL DEFAULT NULL,
   `product_id` INT NULL DEFAULT NULL,
-  FOREIGN KEY (`user_id`) REFERENCES Users(`id`),
-  FOREIGN KEY (`product_id`) REFERENCES Products(`id`),
-  UNIQUE KEY (`user_id`)
+  `user_id` BIGINT NULL DEFAULT NULL,
+  `desired_quantity`INT DEFAULT 1,
+  `unit_cost` INT,
+  `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modified` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  UNIQUE KEY (`user_id`,`product_id`)
 )

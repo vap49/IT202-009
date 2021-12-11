@@ -1,7 +1,6 @@
 <?php
 require_once(__DIR__ . "/db.php");
 $BASE_PATH = '/Project/'; //This is going to be a helper for redirecting to our base project path since it's nested in another folder
-
 function se($v, $k = null, $default = "", $isEcho = true)
 {
     if (is_array($v) && isset($k) && isset($v[$k])) {
@@ -27,18 +26,15 @@ function se($v, $k = null, $default = "", $isEcho = true)
         return htmlspecialchars($returnValue, ENT_QUOTES);
     }
 }
-
 //TODO 2: filter helpers
 function sanitize_email($email = "")
 {
     return filter_var(trim($email), FILTER_SANITIZE_EMAIL);
 }
-
 function is_valid_email($email = "")
 {
     return filter_var(trim($email), FILTER_VALIDATE_EMAIL);
 }
-
 //TODO 3: User Helpers
 function is_logged_in($redirect = false, $destination = "login.php")
 {
@@ -49,7 +45,6 @@ function is_logged_in($redirect = false, $destination = "login.php")
     }
     return $isLoggedIn; //se($_SESSION, "user", false, false);
 }
-
 function has_role($role)
 {
     if (is_logged_in() && isset($_SESSION["user"]["roles"])) {
@@ -61,7 +56,6 @@ function has_role($role)
     }
     return false;
 }
-
 function get_username()
 {
     if (is_logged_in()) { //we need to check for login first because "user" key may not exist
@@ -69,7 +63,6 @@ function get_username()
     }
     return "";
 }
-
 function get_user_email()
 {
     if (is_logged_in()) { //we need to check for login first because "user" key may not exist
@@ -77,7 +70,6 @@ function get_user_email()
     }
     return "";
 }
-
 function get_user_id()
 {
     if (is_logged_in()) { //we need to check for login first because "user" key may not exist
@@ -85,7 +77,6 @@ function get_user_id()
     }
     return false;
 }
-
 //TODO 4: Flash Message Helpers
 function flash($msg = "", $color = "info")
 {
@@ -107,14 +98,12 @@ function getMessages()
     }
     return array();
 }
-
 //TODO generic helpers
 function reset_session()
 {
     session_unset();
     session_destroy();
 }
-
 function users_check_duplicate($errorInfo)
 {
     if ($errorInfo[1] === 1062) {
@@ -141,7 +130,6 @@ function get_url($dest)
     //handle relative path
     return $BASE_PATH . $dest;
 }
-
 function get_columns($table)
 {
     $table = se($table, null, null, false);
@@ -157,7 +145,6 @@ function get_columns($table)
     }
     return $results;
 }
-
 function save_data($table, $data, $ignore = ["submit"])
 {
     $table = se($table, null, null, false);
@@ -188,7 +175,6 @@ function save_data($table, $data, $ignore = ["submit"])
         return -1;
     }
 }
-
 function inputMap($fieldType)
 {
     if (str_contains($fieldType, "varchar")) {
@@ -200,7 +186,6 @@ function inputMap($fieldType)
     }
     return "text"; //default
 }
-
 function update_data($table, $id,  $data, $ignore = ["id", "submit"])
 {
     $columns = array_keys($data);
@@ -236,3 +221,60 @@ function update_data($table, $id,  $data, $ignore = ["id", "submit"])
     }
 }
 
+function add_to_cart(){
+    $results = [];
+    $db = getDB();
+    $query = "SELECT * FROM Products WHERE stock > 0 && visibility > 0";
+    
+    // update quantity here w item id and user id and if it is already in the users cart then update quantity
+    $stmt = $db->prepare($query);
+    $results = [];
+    try {
+        $stmt->execute();
+        $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if ($r) {
+            $results = $r;
+         }
+        } catch (PDOException $e){
+            flash("<pre>" . var_export($e, true) . "</pre>");
+        }
+    return $results;
+}
+
+function allCartItems(){
+    $results = [];
+    $db = getDB();
+    $query = "SELECT * FROM cart WHERE desired_quantity > 0";
+    $stmt = $db->prepare($query);
+    $results = [];
+    try {
+        $stmt->execute();
+        $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if ($r) {
+            $results = $r;
+         }
+        } catch (PDOException $e){
+            flash("<pre>" . var_export($e, true) . "</pre>");
+        }
+    return $results;
+}
+function deci($num){
+    $arr = str_split((string)$num);
+    
+    $pos = count($arr)-2;
+    
+    $arr2 = array_slice($arr,0,$pos); // front numbers
+    
+    $arr3 = array_slice($arr,-2,2); // last numbers
+    
+    $string = "";
+    foreach($arr2 as $num) :
+    $string = $string . $num;
+    endforeach;
+    $string = $string . '.';
+    foreach($arr3 as $num) :
+    $string = $string . $num;
+    endforeach;
+    
+    return $string; 
+}
