@@ -214,42 +214,269 @@
 
  [https://github.com/vap49/IT202-009/pull/63](https://github.com/vap49/IT202-009/pull/63)</p></td></tr><tr><td><table><tr><td>F11 - List all the items<tr><td>Status: completed</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/82918026/144702259-447c0006-2439-4177-8039-2bfa86cad855.png"><p>The cart items are being listed and shown to the user</td></tr></td></tr></table></td></tr><tr><td><table><tr><td>F11 - Show subtotal for each line item based on desired_quantity * unit_cost<tr><td>Status: completed</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/82918026/144702259-447c0006-2439-4177-8039-2bfa86cad855.png"><p>The subtotal and order total for the cart are shown to the user on the right side of the screen</td></tr></td></tr></table></td></tr><tr><td><table><tr><td>F11 - Show total cart value (sum of line item subtotals)<tr><td>Status: completed</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/82918026/144702259-447c0006-2439-4177-8039-2bfa86cad855.png"><p>The order total is shown here on the right of the screen</td></tr></td></tr></table></td></tr><tr><td><table><tr><td>F11 - Will be able to click an item to see more details (Product Details Page)<tr><td>Status: incomplete</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/82918026/144702259-447c0006-2439-4177-8039-2bfa86cad855.png"><p>Could not complete in time, however, it would be an easy fix just add an href on the product name that links over to the product details page. href link will carry the item id do be displayed over to the product details page</td></tr></td></tr></table></td></tr></td></tr></table>
 - Milestone 3
-  - [ ] (mm/dd/yyyy of completion) User will be able to purchase items in their Cart
-    -  List of Evidence of Feature Completion
-      - Status: Pending (Completed, Partially working, Incomplete, Pending)
-      - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-      - Pull Requests
-        - PR link #1 (repeat as necessary)
-      - Screenshots
-        - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-          - Screenshot #1 description explaining what you're trying to show
-  - [ ] (mm/dd/yyyy of completion) Order Confirmation Page
-    -  List of Evidence of Feature Completion
-      - Status: Pending (Completed, Partially working, Incomplete, Pending)
-      - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-      - Pull Requests
-        - PR link #1 (repeat as necessary)
-      - Screenshots
-        - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-          - Screenshot #1 description explaining what you're trying to show
-  - [ ] (mm/dd/yyyy of completion) User will be able to see their Purchase History
-    -  List of Evidence of Feature Completion
-      - Status: Pending (Completed, Partially working, Incomplete, Pending)
-      - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-      - Pull Requests
-        - PR link #1 (repeat as necessary)
-      - Screenshots
-        - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-          - Screenshot #1 description explaining what you're trying to show
-    - [ ] (mm/dd/yyyy of completion) Store Owner will be able to see all Purchase History
-    -  List of Evidence of Feature Completion
-      - Status: Pending (Completed, Partially working, Incomplete, Pending)
-      - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-      - Pull Requests
-        - PR link #1 (repeat as necessary)
-      - Screenshots
-        - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-          - Screenshot #1 description explaining what you're trying to show
+ 
+<table>
+<tr><td>milestone 3</td></tr><tr><td>
+<table>
+<tr><td>F1 - User will be able to purchase items in their Cart ()</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+ [https://vap49-prod.herokuapp.com/Project/cart.php](https://vap49-prod.herokuapp.com/Project/cart.php)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/vap49/IT202-009/pull/81](https://github.com/vap49/IT202-009/pull/81)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F1 - Create an Orders table (id, user_id, created, total_price, address, payment_method)</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/82918026/145666523-a14cfee8-7609-4219-83d5-78c11743d82d.png">
+<p>Showing Orders Table</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F1 - Create an OrderItems table (id, order_id, product_id, quantity, unit_price)</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/808080/ffffff?text=pending"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/82918026/145666537-c9e4b2b3-f9cc-4cb7-80d4-c572641f7669.png">
+<p>Showing OrderItems Table</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F1 - Checkout Form</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/82918026/145666561-c2d12ae2-4a3c-4967-967e-2a7a7faa01c2.png">
+<p>Showing the checkout form</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F1 - User will be asked for their Address for shipping purposes</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/82918026/145666561-c2d12ae2-4a3c-4967-967e-2a7a7faa01c2.png">
+<p>Showing the address information request</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F1 - Order process (Verify current Price to Products table)</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/82918026/145667411-de5f540f-e767-4f2a-a47d-2c1c5323bedc.png">
+<p>Showing the verification of the prices </p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F1 - Product Quantity</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/82918026/145667515-1206a5ca-43e9-4de2-854b-b2b6649e1c4e.png">
+<p>Verifying the desired quantity with stock</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F1 - Entry into Orders Table</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/82918026/145667904-0e20b525-15d6-4b88-b86b-68f0f61f100c.png">
+<p>Showing the entry into the orders table</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F1 - Copy Cart details into OrderItems table </td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/82918026/145667954-cc790c87-256f-4cd0-9c03-181fbaf64171.png">
+<p>Showing query to copy cart details into ordersItems table</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F1 - Update the Products table stock for each item to deduct the ordered quantity</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/82918026/145668325-c402de63-55ac-4968-bb22-22b0a5bca0c4.png">
+<p>Showing the query to update the table stock for each item to deduct the ordered quantity</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F1 - Clear out the user's cart after successful order</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/82918026/145668529-cb14deec-b668-440f-8c18-14749add3a30.png">
+<p>Showing Query to delete from the cart table the users cart </p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F1 - Redirect user to Order Confirmation Page</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/82918026/145668568-5bf77374-4367-475e-b6db-8dcb1a08d7d1.png">
+<p>NOTE: As stated earlier, i am having the confirmation page die to the order details page so that there is not an intermediate page between the checkout form and the order details page. </p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F2 - Redirect to order confirmation page  ()</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+ [https://vap49-prod.herokuapp.com/Project/order_details.php?id=18](https://vap49-prod.herokuapp.com/Project/order_details.php?id=18)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/vap49/IT202-009/pull/81](https://github.com/vap49/IT202-009/pull/81)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F2 - Show order details from the Order and OrderItems table</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/82918026/145666983-c9749338-0f04-41a5-b3af-35812cf371ff.png">
+<p>Showing the order confirmation page with details form the order and order items table. NOTE: I decided to have the confirmed page process all of the information and then immediately redirect the user to the order details page as i thought that would be the best way to do it without having placeholder page in between. </p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F3 - User will be able to see their purchase history ()</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+ [https://vap49-prod.herokuapp.com/Project/order_history.php](https://vap49-prod.herokuapp.com/Project/order_history.php)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/vap49/IT202-009/pull/80](https://github.com/vap49/IT202-009/pull/80)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F3 - List item can be clicked to view the full details in the Order Details Page</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/82918026/145666893-eb4d23ad-1250-4777-a6bd-6d059dc1f17b.png">
+<p>Showing the user orders page </p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F4 - Store owner will be able to see all Purchase History ()</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+ [https://vap49-prod.herokuapp.com/Project/Admin/orders.php](https://vap49-prod.herokuapp.com/Project/Admin/orders.php)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/vap49/IT202-009/pull/80](https://github.com/vap49/IT202-009/pull/80)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F4 - A list item can be clicked to view the full details in the Order Details Page</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/82918026/145666945-a2a56123-2c8b-443f-a3d5-7bf3e8e515a9.png">
+<p>Showing the admin page for all orders from all users</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr></td></tr></table>
 - Milestone 4
 - - Milestone 4
 - [ ] (mm/dd/yyyy of completion) User can set their profile to be public or private (will need another column in Users table)
