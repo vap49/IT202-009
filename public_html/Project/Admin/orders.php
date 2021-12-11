@@ -22,7 +22,7 @@ try {
         $orders = $r;
     }
 } catch (PDOException $e) {
-    flash("Orders Query Doesn't Work");
+    flash("Something Broke");
 }
 ?>
 <html>
@@ -46,22 +46,7 @@ try {
                     <th><?php se($item, "id") ?></th>
                     <th><?php se($item, "user_id") ?></th>
                     <th><?php se($item, "address") ?></th>
-                    <th><?php
-                        $pay = (int) se($item, "payment_method", "", false);
-                        switch ($pay) {
-                            case 1:
-                                echo "Visa";
-                                break;
-                            case 2:
-                                echo "Amex";
-                                break;
-                            case 3:
-                                echo "Mastercard";
-                                break;
-                            case 4:
-                                echo "Cash";
-                        }
-                        ?></th>
+                    <th><?php se($item, "payment_method"); ?></th>
                     <th><?php se($item, "created"); ?></th>
                     <th>
                         <a href="<?php
