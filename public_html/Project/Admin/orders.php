@@ -1,4 +1,3 @@
-
 <?php
 require(__DIR__ . "/../../../partials/nav.php");
 
@@ -13,44 +12,108 @@ if (!has_role("Admin")) {
 
 $userId = get_user_id();
 $db = getDB();
-$query = "SELECT * FROM orders Limit 10";
+$query = "SELECT * FROM orders LIMIT 10";
 $stmt = $db->prepare($query);
-$results = [];
+$orders = [];
 try {
     $stmt->execute();
-    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if ($r) {
+        $orders = $r;
+    }
 } catch (PDOException $e) {
-    echo "<pre>" . var_export($e, true) . "</pre>";
+    flash("Orders Query Doesn't Work");
 }
 ?>
-<h3>All Orders</h3>
-<?php if ($results && count($results) == 0) : ?>
-    <p>No orders!</p>
-<?php else : ?>
-    <table padding=5>
-        <?php foreach ($results as $index => $record) : ?>
-            <?php if ($index == 0) : ?>
-                <thead>
-                    <?php foreach ($record as $column => $value) : ?>
-                        <th><?php se($column); ?></th>
-                    <?php endforeach; ?>
-                </thead>
-            <?php endif; ?>
-            <tr>
-                <?php foreach ($record as $column => $value) : ?>
-                    <td><?php se($value, null, "N/A"); ?></td>
-                <?php endforeach; ?>
-            </tr>
-        <?php endforeach; ?>
-    </table>
-<?php endif; ?>
+<html>
 
+<body>
+    <h3 align="center">All Orders</h3>
+    <?php if ($orders && count($orders) == 0) : ?>
+        <p>No orders!</p>
+    <?php else : ?>
+        <table class="t1" style="width:50%" ;>
+            <tr>
+                <th style="font-size: 20px;">Id</th>
+                <th style="font-size: 20px;">User ID</th>
+                <th style="font-size: 20px;">Address</th></b>
+                <th style="font-size: 20px;">Payment</th></b>
+                <th style="font-size: 20px;">Date Purchased</th></b>
+                <th style="font-size: 20px;">Order Details</th></b>
+            </tr>
+            <?php foreach ($orders as $item) : ?>
+                <tr>
+                    <th><?php se($item, "id") ?></th>
+                    <th><?php se($item, "user_id") ?></th>
+                    <th><?php se($item, "address") ?></th>
+                    <th><?php
+                        $pay = (int) se($item, "payment_method", "", false);
+                        switch ($pay) {
+                            case 1:
+                                echo "Visa";
+                                break;
+                            case 2:
+                                echo "Amex";
+                                break;
+                            case 3:
+                                echo "Mastercard";
+                                break;
+                            case 4:
+                                echo "Cash";
+                        }
+                        ?></th>
+                    <th><?php se($item, "created"); ?></th>
+                    <th>
+                        <a href="<?php
+                           $full = (string) get_url("order_details.php") . "?id=" . (int) se($item, "id", "", false);
+                           echo $full; ?>" class="orderLink">Order Details
+                        </a>
+
+                    </th>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    <?php endif; ?>
+</body>
+
+</html>
+<!-- Style Here Later -->
 <style>
-    td, th{
-        border: 2px solid black;
-        padding: 3px 10px;
-        justify-items: center;
+    .t1 {
+        margin-left: auto;
+        margin-right: auto;
     }
 
-</style>
+    td,
+    th {
+        border: 1px solid black;
+        padding: 5px 15px;
+        justify-items: center;
+        color: #543855;
+    }
 
+    tr:nth-child(even) {
+        background-color: lightsalmon;
+    }
+
+    tr:nth-child(odd) {
+        background-color: salmon;
+    }
+
+    .userHist {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: auto;
+        margin-bottom: auto;
+
+    }
+
+    .orderLink {
+        text-decoration: none;
+        color: #353643;
+    }
+
+    body {
+        background-color: #E88D72;
+    }
+</style>

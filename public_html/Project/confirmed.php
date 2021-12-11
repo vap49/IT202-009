@@ -78,9 +78,7 @@
         try {
             $stmt2->execute();
             $lastID = $db->lastinsertid(); // Gets Last Order ID
-            flash("Order Created");
         } catch (PDOException $e) {
-            flash("Order Error, try again");
         }
         // copy cart details into the orderItems tables with the ORDER ID
         foreach ($results as $item) {
@@ -93,7 +91,6 @@
             try {
                 $stmt4->execute();
             } catch (PDOException $e) {
-                flash("Order Items not working");
             }
         }
 
@@ -116,9 +113,7 @@
             $stmt5 = $db->prepare($query5);
             try {
                 $stmt5->execute();
-                flash("stock updated");
             } catch (PDOException $e) {
-                flash("Stock not updated");
             }
         }
     
@@ -128,18 +123,17 @@
         $stmt6 = $db->prepare($query6);
         try {
             $stmt6->execute();
-            flash("Cart Cleared");
         } catch (PDOException $e) {
             flash("<pre>" . var_export($e, true) . "</pre>");
         }
         flash("THANK YOU FOR YOUR PURCHASE!");
     }
 
+    die(header("Location: order_details.php?id=$lastID"));
     ?>
-<a href="orderDetails.php?id=<?php 
-    echo $lastID?>">CLICK HERE FOR ORDER DETAILS</a>
 
 
 <?php  ?>
 </body>
+
 <?php require(__DIR__ . "/../../partials/footer.php"); ?>

@@ -21,3 +21,8 @@ canvas{
 .title{
     text-decoration: none;
 }
+.details{
+     text-decoration: none;
+     background-color: bg-info;
+     padding: 2px;
+    }
