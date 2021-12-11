@@ -28,6 +28,8 @@ if (!empty($_GET["action"])) {
                     } catch (PDOException $e) {
                         //flash("<pre>" . var_export($e, true) . "</pre>");
                     }
+                    $co = se($item, "desired_quantity");
+                    flash($co);
                 }
             endforeach;
             flash("Successfully Added To Cart");
@@ -145,9 +147,9 @@ try {
                             $y = $item['desired_quantity'];
                             $subtotal = $x * $y;
                             ?>
-                            <td><?php se($item, 'name'); ?></td>
-                            <td><?php se($item, 'desired_quantity'); ?></td>
-                            <td>$<?php echo deci($subtotal); ?></td>
+                            <td> Name: <?php se($item, 'name'); ?></td>
+                            <td> Quantity: <?php se($item, 'desired_quantity'); ?></td><br></br>
+                            <!-- <td>$<?php # echo deci($subtotal); ?></td> -->
                             <?php
                             $total = $total + $subtotal;
                             ?>
@@ -157,16 +159,15 @@ try {
                     <div class="row">
                         
                         <div class="col-md-5">
-                            <h5 class="float-right">Subtotal: 
-                                <?php
-                                if ($total == 0) {
-                                    echo "0";
-                                } else {
-                                    echo deci($subtotal);
-                                }
-                                ?>
+                            <!-- <h5 class="float-right">Subtotal: 
+                                <?php #
+                                #if ($total == 0) {
+                                #    echo "0";
+                                #} else {
+                                #    echo deci($subtotal);
+                                #?>
 
-                            </h5>
+                            </h5> -->
                         </div>
                         <!--- Price section --->
                         <!--- Total price section --->
@@ -192,8 +193,7 @@ try {
                 <div class="btn btn-danger btn-block px-5">Empty Cart</div>
             </a>
         </div>
-        <div class="btn btn-warning btn-block px-5">Continue Checkout</div>
-        </a>
+        <a class="btn btn-warning btn-block px-5" href = "buystuff.php#">Continue Checkout</a>
         </div>
         <!--- Total Price section ends here --->
 </div>
@@ -201,3 +201,6 @@ try {
 </body>
 
 </html>
+<?php
+    require_once(__DIR__."/../../partials/footer.php");
+?>
