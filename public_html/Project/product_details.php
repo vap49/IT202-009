@@ -1,6 +1,26 @@
 
 <?php
 require(__DIR__ . "/../../partials/nav.php");
+
+// ratings database
+if (isset($_POST["submit"])) {
+  $comment = $_POST['comment'];
+  $rating = $_POST['rating'];
+  $db = getDB();
+  $item_id = $_GET['id'];
+  $user = get_user_id();
+  $params = [":comment" => $comment, ":rating" => $rating, ":user_id" => get_user_id(), ":prod_id" => $item_id];
+
+  $query2 = "INSERT INTO ratings (product_id, user_id, rating, comment) VALUES (:prod_id, :user_id, :rating, :comment)";
+  $stmt2 = $db->prepare($query2);
+  try {
+    $stmt2->execute($params);
+    flash("Review Submitted");
+  } catch (PDOException $e) {
+    flash("NOT WORKING");
+  }
+}
+
 $item_id = $_GET['id'];
 $results = [];
 $db = getDB();
