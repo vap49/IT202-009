@@ -49,7 +49,10 @@ flash("THANK YOU FOR YOUR ORDER");
            <tr>
             <th><?php se($item,"name")?></th>
             <th>x<?php se($item,"quantity")?></th>
-            <th><?php se($item,"unit_price")?></th>
+            <th>$<?php 
+                $price = (int)se($item,"unit_price","",false);
+                echo($price) /100;?>
+                </th>
         </tr>
         <?php endforeach; ?>
     </table>
