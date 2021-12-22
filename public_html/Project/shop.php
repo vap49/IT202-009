@@ -6,7 +6,7 @@ $db = getDB();
 //Sort and Filters
 $col = se($_GET, "col", "cost", false);
 //allowed list
-if (!in_array($col, ["unit_price", "category", "name"])) {
+if (!in_array($col, ["unit_price", "category", "name","rating"])) {
     $col = "unit_price"; //default value, prevent sql injection
 }
 $order = se($_GET, "order", "asc", false);
@@ -56,6 +56,7 @@ try {
             <select class="form-control" name="col" value="<?php se($col); ?>">
                 <option value="unit_price">Price</option>
                 <option value="category">Category</option>
+                <option value="rating">Rating</option>
             </select>
             <script>
                 //quick fix to ensure proper value is selected since
