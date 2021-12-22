@@ -8,10 +8,10 @@ if (!is_logged_in()) {
 if (isset($_POST["save"])) {
     $email = se($_POST, "email", null, false);
     $username = se($_POST, "username", null, false);
-
+    $privacy = se($_POST, "privacy", null, false);
     $params = [":email" => $email, ":username" => $username, ":id" => get_user_id()];
     $db = getDB();
-    $stmt = $db->prepare("UPDATE Users set email = :email, username = :username where id = :id");
+    $stmt = $db->prepare("UPDATE Users set email = :email, username = :username, privacy = :privacy where id = :id");
     try {
         $stmt->execute($params);
     } catch (Exception $e) {
@@ -88,6 +88,10 @@ $username = get_username();
 <div class="container-fluid">
     <h1>Profile</h1>
     <form method="POST" onsubmit="return validate(this);">
+        <div class="mb-4">
+            <label class="form-label" for="vis">Public or Private</label>
+            <input class="form-control" type="privacy" name="privacy" id="priv" />
+        </div>
         <div class="mb-3">
             <label class="form-label" for="email">Email</label>
             <input class="form-control" type="email" name="email" id="email" value="<?php se($email); ?>" />
