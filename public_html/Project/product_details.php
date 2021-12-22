@@ -83,7 +83,7 @@ try {
       <?php endforeach; ?>
         </div>
   </div>
-  <div class="ratingsDC">
+  <div class="ratings">
     <?php
     $ratings = [];
     $db = getDB();
