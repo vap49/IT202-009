@@ -17,6 +17,12 @@ if (isset($_POST["submit"])) {
   } catch (PDOException $e) {
     flash("NOT WORKING");
   }
+  $stmt2 = $db->prepare("UPDATE Products SET rating = (SELECT ROUND(AVG(rating),0) FROM ratings WHERE Products.id = ratings.product_id)");
+  try {
+    $stmt2->execute();
+  } catch (PDOException $e) {
+    flash("broke");
+  }
 }
 
 $item_id = $_GET['id'];
@@ -48,6 +54,11 @@ try {
                                                     $item_cost = (int)se($item, "unit_price", "", false);
                                                     $num = deci($item_cost);
                                                     echo $num; ?></strong></span></p>
+              <p>
+                  Average Rating: <?php 
+                    se($item, "rating");
+                  ?> Stars
+              </p>
               <p class="pt-1"><?php se($item, "description") ?></p>
 
               <div class="table-responsive">
@@ -67,11 +78,11 @@ try {
           <form method="POST">
             <fieldset>
               <span class="star-cb-group">
-                <input type="radio" id="rating-1" name="rating" value="5" checked="checked" /><label for="rating-1">1</label>
-                <input type="radio" id="rating-2" name="rating" value="4" /><label for="rating-2">2</label>
+                <input type="radio" id="rating-1" name="rating" value="1" checked="checked" /><label for="rating-1">1</label>
+                <input type="radio" id="rating-2" name="rating" value="2" /><label for="rating-2">2</label>
                 <input type="radio" id="rating-3" name="rating" value="3" /><label for="rating-3">3</label>
-                <input type="radio" id="rating-4" name="rating" value="2" /><label for="rating-4">4</label>
-                <input type="radio" id="rating-5" name="rating" value="1" /><label for="rating-5">5</label>
+                <input type="radio" id="rating-4" name="rating" value="4" /><label for="rating-4">4</label>
+                <input type="radio" id="rating-5" name="rating" value="5" /><label for="rating-5">5</label>
               </span>
             </fieldset>
             <label for="comment">Add Review Here: </label><br>
@@ -88,13 +99,13 @@ try {
     $ratings = [];
     $db = getDB();
     $prod = $_GET['id'];
-    $base_query = "SELECT * FROM ratings ";
+    $base_query = "SELECT * FROM ratings JOIN Users ON ratings.user_id = Users.id";
     $total_query = "SELECT count(1) as total FROM ratings";
     $query = " WHERE `product_id` = $prod";
     $params = [];
     $per_page = 10;
     paginate($total_query . $query, $params, $per_page);
-    $page = se($_GET, "page", 1, false); 
+    $page = se($_GET, "page", 1, false);
     $offset = ($page - 1) * $per_page;
     $query .= " LIMIT :offset, :count";
     $params[":offset"] = $offset;
@@ -102,36 +113,36 @@ try {
     //get the records
     $stmt = $db->prepare($base_query . $query);
     foreach ($params as $key => $value) {
-        $type = is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR;
-        $stmt->bindValue($key, $value, $type);
+      $type = is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR;
+      $stmt->bindValue($key, $value, $type);
     }
-    $params = null; 
+    $params = null;
 
     try {
-        $stmt->execute($params);
-        $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        if ($r) {
-            $ratings = $r;
-        }
+      $stmt->execute($params);
+      $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      if ($r) {
+        $ratings = $r;
+      }
     } catch (PDOException $e) {
-        flash("<pre>" . var_export($e, true) . "</pre>");
+      flash("<pre>" . var_export($e, true) . "</pre>");
     } ?>
-    
-      <table class="t1" style="width:50%" ;>
+
+    <table class="t1" style="width:50%" ;>
+      <tr>
+        <th style="font-size: 18px; color: black; text-transform: uppercase; text-align: center;">User</th></b>
+        <th style="font-size: 18px; color: black; text-transform: uppercase; text-align: center;">Rating</th></b>
+        <th style="font-size: 18px; color: black; text-transform: uppercase; text-align: center;">Comment</th></b>
+        <th style="font-size: 18px; color: black; text-transform: uppercase; text-align: center;">Created</th></b>
+      </tr> <?php foreach ($ratings as $item) : ?>
         <tr>
-          <th style="font-size: 18px; color: black; text-transform: uppercase; text-align: center;">User ID</th></b>
-          <th style="font-size: 18px; color: black; text-transform: uppercase; text-align: center;">Rating</th></b>
-          <th style="font-size: 18px; color: black; text-transform: uppercase; text-align: center;">Comment</th></b>
-          <th style="font-size: 18px; color: black; text-transform: uppercase; text-align: center;">Created</th></b>
-        </tr> <?php foreach ($ratings as $item) : ?> 
-          <tr>
-            <th><?php se($item, "user_id") ?></th>
-            <th><?php se($item, "rating") ?></th>
-            <th><?php se($item, "comment") ?></th>
-            <th><?php se($item, "created") ?></th>
-          </tr>
-        <?php endforeach; ?>
-      </table>
+          <th><?php se($item, "username") ?></th>
+          <th><?php se($item, "rating") ?></th>
+          <th><?php se($item, "comment") ?></th>
+          <th><?php se($item, "created") ?></th>
+        </tr>
+      <?php endforeach; ?>
+    </table>
   </div>
 
 
@@ -140,18 +151,32 @@ try {
 </div>
 <br>
 <nav aria-label="Generic Pagination">
-    <ul class="pagination">
-        <li class="page-item <?php echo ($page - 1) < 1 ? "disabled" : ""; ?>">
-            <a class="page-link" href="?<?php se(persistQueryString($page - 1)); ?>" tabindex="-1">Previous</a>
-        </li>
-        <?php for ($i = 0; $i < $total_pages; $i++) : ?>
-            <li class="page-item <?php echo ($page - 1) == $i ? "active" : ""; ?>"><a class="page-link" href="?<?php se(persistQueryString($i + 1)); ?>"><?php echo ($i + 1); ?></a></li>
-        <?php endfor; ?>
-        <li class="page-item <?php echo ($page) >= $total_pages ? "disabled" : ""; ?>">
-            <a class="page-link" href="?<?php se(persistQueryString($page + 1)); ?>">Next</a>
-        </li>
-    </ul>
+  <ul class="pagination">
+    <li class="page-item <?php echo ($page - 1) < 1 ? "disabled" : ""; ?>">
+      <a class="page-link" href="?<?php se(persistQueryString($page - 1)); ?>" tabindex="-1">Previous</a>
+    </li>
+    <?php for ($i = 0; $i < $total_pages; $i++) : ?>
+      <li class="page-item <?php echo ($page - 1) == $i ? "active" : ""; ?>"><a class="page-link" href="?<?php se(persistQueryString($i + 1)); ?>"><?php echo ($i + 1); ?></a></li>
+    <?php endfor; ?>
+    <li class="page-item <?php echo ($page) >= $total_pages ? "disabled" : ""; ?>">
+      <a class="page-link" href="?<?php se(persistQueryString($page + 1)); ?>">Next</a>
+    </li>
+  </ul>
 </nav>
+<style>
+  table {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  td,
+  th {
+    border: 1px solid black;
+    padding: 5px 15px;
+    justify-items: center;
+    color: #543855;
+  }
+</style>
 <?php
 require(__DIR__ . "/../../partials/footer.php");
 ?>
