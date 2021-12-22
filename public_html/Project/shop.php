@@ -6,7 +6,7 @@ $db = getDB();
 //Sort and Filters
 $col = se($_GET, "col", "cost", false);
 //allowed list
-if (!in_array($col, ["unit_price", "category", "name"])) {
+if (!in_array($col, ["unit_price", "category", "name","rating"])) {
     $col = "unit_price"; //default value, prevent sql injection
 }
 $order = se($_GET, "order", "asc", false);
@@ -15,22 +15,35 @@ if (!in_array($order, ["asc", "desc"])) {
     $order = "asc"; //default value, prevent sql injection
 }
 $name = se($_GET, "name", "", false);
-//dynamic query
-$query = "SELECT * FROM Products WHERE visibility > 0"; //1=1 shortcut to conditionally build AND clauses
-$params = []; //define default params, add keys as needed and pass to execute
-//apply name filter
+
+$base_query = "SELECT * FROM Products ";
+$total_query = "SELECT count(1) as total FROM Products";
+$query = " WHERE visibility > 0";
+$params = [];
 if (!empty($name)) {
     $query .= " AND name like :name";
     $params[":name"] = "%$name%";
 }
-//apply column and order sort
 if (!empty($col) && !empty($order)) {
-    $query .= " ORDER BY $col $order"; //be sure you trust these values, I validate via the in_array checks above
+    $query .= " ORDER BY $col $order"; 
 }
-$stmt = $db->prepare($query); //dynamically generated query
-//$stmt = $db->prepare("SELECT id, name, description, cost, stock, image FROM BGD_Items WHERE stock > 0 LIMIT 50");
+$per_page = 10;
+paginate($total_query . $query, $params, $per_page);
+$page = se($_GET, "page", 1, false); 
+$offset = ($page - 1) * $per_page;
+$query .= " LIMIT :offset, :count";
+$params[":offset"] = $offset;
+$params[":count"] = $per_page;
+//get the records
+$stmt = $db->prepare($base_query . $query);
+foreach ($params as $key => $value) {
+    $type = is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR;
+    $stmt->bindValue($key, $value, $type);
+}
+$params = null; 
+
 try {
-    $stmt->execute($params); //dynamically populated params to bind
+    $stmt->execute($params);
     $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if ($r) {
         $results = $r;
@@ -56,6 +69,7 @@ try {
             <select class="form-control" name="col" value="<?php se($col); ?>">
                 <option value="unit_price">Price</option>
                 <option value="category">Category</option>
+                <option value="rating">Rating</option>
             </select>
             <script>
                 //quick fix to ensure proper value is selected since
@@ -108,6 +122,20 @@ try {
         <?php endforeach; ?>
     </div>
 </div>
+
+<nav aria-label="Generic Pagination">
+    <ul class="pagination">
+        <li class="page-item <?php echo ($page - 1) < 1 ? "disabled" : ""; ?>">
+            <a class="page-link" href="?<?php se(persistQueryString($page - 1)); ?>" tabindex="-1">Previous</a>
+        </li>
+        <?php for ($i = 0; $i < $total_pages; $i++) : ?>
+            <li class="page-item <?php echo ($page - 1) == $i ? "active" : ""; ?>"><a class="page-link" href="?<?php se(persistQueryString($i + 1)); ?>"><?php echo ($i + 1); ?></a></li>
+        <?php endfor; ?>
+        <li class="page-item <?php echo ($page) >= $total_pages ? "disabled" : ""; ?>">
+            <a class="page-link" href="?<?php se(persistQueryString($page + 1)); ?>">Next</a>
+        </li>
+    </ul>
+</nav>
 <?php
 require(__DIR__ . "/../../partials/footer.php");
 ?>

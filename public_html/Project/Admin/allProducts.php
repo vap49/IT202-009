@@ -7,15 +7,17 @@ if (!is_logged_in()) {
 }
 if (!has_role("Admin")) {
     flash("You don't have permission to view this page", "warning");
-    die(header("Location: $BASE_PATH" . "shop.php"));
+    die(header("Location: $BASE_PATH" . "home.php"));
 }
-$orders = [];
+
+
+$results = [];
 $db = getDB();
 //Sort and Filters
 $col = se($_GET, "col", "created", false);
 //allowed list
-if (!in_array($col, ["created", "total_price"])) {
-    $col = "total_price"; //default value, prevent sql injection
+if (!in_array($col, ["stock", "created", "unit_price"])) {
+    $col = "unit_price"; //default value, prevent sql injection
 }
 $order = se($_GET, "order", "asc", false);
 //allowed list
@@ -23,10 +25,15 @@ if (!in_array($order, ["asc", "desc"])) {
     $order = "asc"; //default value, prevent sql injection
 }
 $name = se($_GET, "name", "", false);
-$userId = get_user_id();
-$base_query = "SELECT * FROM orders ";
-$total_query = "SELECT count(1) as total FROM orders";
-$query = " WHERE 1=1";
+$base_query = "SELECT * FROM Products ";
+$total_query = "SELECT count(1) as total FROM Products";
+if (isset($_GET['quantity'])) {
+    $quant = $_GET['quantity'];
+    $query = " WHERE stock <= $quant";
+} else {
+    $query = " WHERE 1=1";
+}
+
 $params = [];
 if (!empty($name)) {
     $query .= " AND name like :name";
@@ -35,7 +42,7 @@ if (!empty($name)) {
 if (!empty($col) && !empty($order)) {
     $query .= " ORDER BY $col $order";
 }
-$per_page = 2;
+$per_page = 10;
 paginate($total_query . $query, $params, $per_page);
 $page = se($_GET, "page", 1, false);
 $offset = ($page - 1) * $per_page;
@@ -54,28 +61,40 @@ try {
     $stmt->execute($params);
     $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if ($r) {
-        $orders = $r;
+        $results = $r;
     }
 } catch (PDOException $e) {
     flash("<pre>" . var_export($e, true) . "</pre>");
 }
+
+
 ?>
+
 <html>
 
 <body>
-
-    <h3 align="center">All Orders</h3>
-    <?php if ($orders && count($orders) == 0) : ?>
-        <p>No orders!</p>
+    <h3 align="center">All Products</h3>
+    <?php if ($results && count($results) == 0) : ?>
+        <p>Nothing To Display Here</p>
     <?php else : ?>
         <form class="row row-cols-auto g-3 align-items-center">
             <div class="col">
                 <div class="input-group">
+                    <div class="input-group-text">Search</div>
+                    <input class="form-control" name="name" value="<?php se($name); ?>" />
+                </div>
+                <div class="input-group">
+                    <div class="input-group-text">Quantity</div>
+                    <input class="form-control" name="quantity" value="<?php se($name); ?>" />
+                </div>
+            </div>
+            <div class="col">
+                <div class="input-group">
                     <div class="input-group-text">Sort</div>
                     <select class="form-control" name="col" value="<?php se($col); ?>">
-                        <option value="created">Date Range</option>
+                        <option value="stock">Stock</option>
                         <option value="category">Category</option>
-                        <option value="total_price">Price</option>
+                        <option value="unit_price">Price</option>
                     </select>
                     <script>
                         document.forms[0].col.value = "<?php se($col); ?>";
@@ -95,41 +114,38 @@ try {
                 </div>
             </div>
         </form>
+        <br>
         <table class="t1" style="width:50%" ;>
-            <tr>
-                <th style="font-size: 20px;">Id</th>
-                <th style="font-size: 20px;">User ID</th>
-                <th style="font-size: 20px;">Address</th>
-                <th style="font-size: 20px;">Payment</th>
-                <th style="font-size: 20px;">Date Purchased</th>
-                <th style="font-size: 20px;">Order Details</th>
-                <th> Order Total</th>
-            </tr>
-            <?php foreach ($orders as $item) : ?>
-                <tr>
+            <tr className="headings">
+                <th className="heading" style="text-align: center;">Id</th>
+                <th className="heading" style="text-align: center;">Name</th>
+                <th className="heading" style="text-align: center;">Category</th></b>
+                <th className="heading" style="text-align: center;">Stock</th></b>
+                <th className="heading" style="text-align: center;">Unit Price</th></b>
+                <th className="heading" style="text-align: center;">Date Created</th></b>
+                <th className="heading" style="text-align: center;">Visibility</th></b>
+                <th className="heading" style="text-align: center;">Edit Product</th></b>
+            </tr> <?php foreach ($results as $item) : ?>
+                <tr className="policy">
                     <th><?php se($item, "id") ?></th>
-                    <th><?php se($item, "user_id") ?></th>
-                    <th><?php se($item, "address") ?></th>
-                    <th><?php se($item, "payment_method"); ?></th>
-                    <th><?php se($item, "created"); ?></th>
+                    <th><?php se($item, "name") ?></th>
+                    <th><?php se($item, "category") ?></th>
+                    <th><?php se($item, "stock"); ?></th>
+                    <th>$<?php echo deci(se($item, "unit_price", "", false)) ?></th>
+                    <th><?php se($item, "created") ?></th>
+                    <th><?php se($item, "visibility") ?></th>
+
                     <th>
-                        <a href="<?php
-                                    $full = (string) get_url("order_details.php") . "?id=" . (int) se($item, "id", "", false);
-                                    echo $full; ?>" class="orderLink">Order Details
-                        </a>
+                        <a href="edit_item.php?id=<?php se($item, "id"); ?>" class="orderLink"> EDIT: <?php se($item, "name"); ?></a>
 
                     </th>
-                    <th>
-                        $<?php
-                        $price = (int)se($item, "total_price", "", false);
-                        echo ($price / 100);
-                        ?>
-                    </th>
+
                 </tr>
             <?php endforeach; ?>
         </table>
     <?php endif; ?>
 </body>
+
 
 <nav aria-label="Generic Pagination">
     <ul class="pagination">
@@ -145,8 +161,6 @@ try {
     </ul>
 </nav>
 
-</html>
-<!-- Style Here Later -->
 <style>
     .userHist {
         margin-left: auto;
@@ -161,3 +175,5 @@ try {
         color: #543855;
     }
 </style>
+
+</html>
