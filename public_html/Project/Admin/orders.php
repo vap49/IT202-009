@@ -121,13 +121,71 @@ try {
                     </th>
                     <th>
                         $<?php
-                        $price = (int)se($item, "total_price", "", false);
-                        echo ($price / 100);
-                        ?>
+                            $price = (int)se($item, "total_price", "", false);
+                            echo ($price / 100);
+                            ?>
                     </th>
                 </tr>
             <?php endforeach; ?>
         </table>
+        <h6>
+            Total Of All Orders On Page: $<?php
+                    $results = [];
+                    $db = getDB();
+                    //Sort and Filters
+                    $col = se($_GET, "col", "created", false);
+                    //allowed list
+                    if (!in_array($col, ["created", "total_price"])) {
+                        $col = "total_price"; //default value, prevent sql injection
+                    }
+                    $order = se($_GET, "order", "asc", false);
+                    //allowed list
+                    if (!in_array($order, ["asc", "desc"])) {
+                        $order = "asc"; //default value, prevent sql injection
+                    }
+                    $name = se($_GET, "name", "", false);
+                    $base_query = "SELECT * FROM orders ";
+                    $total_query = "SELECT count(1) as total FROM orders";
+                    $query = " WHERE 1=1";
+                    $params = [];
+                    if (!empty($name)) {
+                        $query .= " AND name like :name";
+                        $params[":name"] = "%$name%";
+                    }
+                    if (!empty($col) && !empty($order)) {
+                        $query .= " ORDER BY $col $order";
+                    }
+                    $per_page = 2;
+                    paginate($total_query . $query, $params, $per_page);
+                    $page = se($_GET, "page", 1, false);
+                    $offset = ($page - 1) * $per_page;
+                    $query .= " LIMIT :offset, :count";
+                    $params[":offset"] = $offset;
+                    $params[":count"] = $per_page;
+                    //get the records
+                    $stmt = $db->prepare($base_query . $query);
+                    foreach ($params as $key => $value) {
+                        $type = is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR;
+                        $stmt->bindValue($key, $value, $type);
+                    }
+                    $params = null;
+
+                    try {
+                        $stmt->execute($params);
+                        $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        if ($r) {
+                            $results = $r;
+                        }
+                    } catch (PDOException $e) {
+                        flash("<pre>" . var_export($e, true) . "</pre>");
+                    }
+                    $total = 0;
+                    foreach ($results as $x) {
+                        $total += se($x, "total_price", "", false);
+                    }
+                    echo $total / 100;
+                    ?>
+        </h6>
     <?php endif; ?>
 </body>
 
