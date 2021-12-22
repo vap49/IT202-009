@@ -5,6 +5,7 @@
 ## Website Link: https://vap49-prod.herokuapp.com/Project/home.php
 ## Your Name: Villaire A. Pierre
 
+
 <!--
 ### Line item / Feature template (use this for each bullet point)
 #### Don't delete this
@@ -478,66 +479,323 @@
 </td>
 </tr></td></tr></table>
 - Milestone 4
-- - Milestone 4
-- [ ] (mm/dd/yyyy of completion) User can set their profile to be public or private (will need another column in Users table)
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-    - Pull Requests
-      - PR link #1 (repeat as necessary)
-    - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
 
-- [ ] (mm/dd/yyyy of completion) User’s Purchase History Changes
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-    - Pull Requests
-      - PR link #1 (repeat as necessary)
-    - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+<table>
+<tr><td>Milestone 4</td></tr><tr><td>
+<table>
+<tr><td>F1 - User can set their profile to be public or private (will need another column in Users table) (2021-12-21)</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
 
-- [ ] (mm/dd/yyyy of completion) Store Owner Purchase History Changes
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-    - Pull Requests
-      - PR link #1 (repeat as necessary)
-    - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+ [https://vap49-prod.herokuapp.com/Project/profile.php](https://vap49-prod.herokuapp.com/Project/profile.php)</p></td></tr>
+<tr><td>PRs:<p>
 
-- [ ] (mm/dd/yyyy of completion) Add pagination to Shop Page (and any other product lists not yet mentioned)
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-    - Pull Requests
-      - PR link #1 (repeat as necessary)
-    - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+ [https://github.com/vap49/IT202-009/pull/89](https://github.com/vap49/IT202-009/pull/89)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F1 - If public, hide email address from other users</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
 
-- [ ] (mm/dd/yyyy of completion) Store Owner will be able to see all products out of stock
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-    - Pull Requests
-      - PR link #1 (repeat as necessary)
-    - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/82918026/147061968-2273a2d5-43a3-4ed9-ab91-b4ba711fe5af.png">
+<p>Showing the User Profile Entry Box that allows the user to set their Profile Visibility to other viewers. </p>
+</td></tr>
 
-- [ ] (mm/dd/yyyy of completion) User can sort products by average rating on the Shop Page
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-    - Pull Requests
-      - PR link #1 (repeat as necessary)
-    - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/82918026/147062313-b5035fef-1584-4393-ad1d-c85f719e4066.png">
+<p>Showing that the user with a visibility modifier of 0 has their username shown, while the visibility modifier of 1 will show the User's Email Address publicly. </p>
+</td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/82918026/147062639-9dd5f4fd-e4ec-4a76-8da0-b9618e5a0a2b.png">
+<p>Screenshot of database with visibility modifiers.</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F2 - User will be able to rate a product they purchased ()</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+ [https://vap49-prod.herokuapp.com/Project/product_details.php?id=1](https://vap49-prod.herokuapp.com/Project/product_details.php?id=1)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/vap49/IT202-009/pull/91](https://github.com/vap49/IT202-009/pull/91)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F2 - Create table called Ratings (id, product_id, user_id, rating, comment, created)</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/82918026/147064101-bc3d1a2a-e5f9-4fe6-b9ee-2c409b420b9c.png">
+<p>Showing the Ratings Table</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F2 - 1-5 rating</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/82918026/147064486-afd7aa4f-3fc2-4b50-9ea2-f8869f0797d2.png">
+<p>Showing the user has the option of rating from 1-5</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F2 - Text Comment (use TEXT data type in sql)</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/82918026/147065626-b0518ccd-fd96-4f5d-a993-2fc46fb6f4db.png">
+<p>Showing the SQL table with comment column being text. </p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F2 - Must be done on the Product Details Page</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/82918026/147065831-10e820d1-9808-4c48-b21c-9fb7e33cfb33.png">
+<p>Showing the Product Details page where the user can leave a review and a comment on the item.</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F2 - Ratings and Rating Comments will be visible on the Product Details page Show the latest 10 reviews -Paginate anything beyond 10</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/82918026/147066079-5d060fb1-3838-4163-9d99-c81674311dba.png">
+<p>Showing the ratings and comments are viewable on the product details page. </p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F2 - Show the latest 10 reviews and Paginate everything beyond 10 </td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/82918026/147066180-f851e715-bfbb-4b19-8734-ae4e588a8b6b.png">
+<p>Showing the latest 10 reviews and showing that anything past 10 is paginated. </p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F2 - Show the average rating on the Product Details Page</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/82918026/147066079-5d060fb1-3838-4163-9d99-c81674311dba.png">
+<p>Showing the average rating is visible on the product details page. </p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F3 - User’s Purchase History Changes (2021-12-21)</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:</td></tr>
+<tr><td>PRs:</td></tr>
+<tr><td>
+<table>
+<tr><td>F3 - Filter by date range</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/82918026/147068413-2e548f44-4f91-46be-8894-0878daef935b.png">
+<p>Showing the orders table is filtered by Date Range</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F4 - Store Owner Purchase History Changes (2021-12-21)</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+ [https://vap49-prod.herokuapp.com/Project/Admin/orders.php](https://vap49-prod.herokuapp.com/Project/Admin/orders.php)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/vap49/IT202-009/pull/91](https://github.com/vap49/IT202-009/pull/91)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F4 - Sort by total, date purchased, etc</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/82918026/147075165-2077066c-cad6-458b-8d02-621c9188da64.png">
+<p>Showing the sort bar that allows the user to sort the results on the page. </p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F4 - Add pagination</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/82918026/147074138-831462a2-8ca5-44c6-9f61-1babd48bcb3a.png">
+<p>Showing pagination </p>
+</td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/82918026/147074448-57219894-fb95-4409-8157-1f6d2494203b.png">
+<p>Showing Pagination</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F4 - The result page should show the accurate total price of the combined search results (i.e., if just 3 records show each of $25, it should show $75 total for this view)</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/82918026/147074138-831462a2-8ca5-44c6-9f61-1babd48bcb3a.png">
+<p>Total Price of items on page is being shown on the screen </p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F5 - Add pagination to Shop Page (and any other product lists not yet mentioned) (2021-12-21)</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+ [https://vap49-prod.herokuapp.com/Project/shop.php](https://vap49-prod.herokuapp.com/Project/shop.php)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/vap49/IT202-009/pull/88](https://github.com/vap49/IT202-009/pull/88)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F5 - item 1</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/82918026/147075434-cabe143f-be69-419d-bada-8ff44ef6d998.png">
+<p>Showing the shop page with pagination </p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F6 - User can sort products by average rating on the Shop Page (2021-12-21)</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+ [https://vap49-prod.herokuapp.com/Project/shop.php?page=1](https://vap49-prod.herokuapp.com/Project/shop.php?page=1)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/vap49/IT202-009/pull/91](https://github.com/vap49/IT202-009/pull/91)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F6 - ![image](https://user-images.githubusercontent.com/82918026/147080993-fd782479-9844-402f-9036-d286a60221ab.png)</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/82918026/147080993-fd782479-9844-402f-9036-d286a60221ab.png">
+<p>Showing users able to sort page by average rating </p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F7 - Store Owner will be able to see all products out of stock (2021-12-21)</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+ [https://vap49-prod.herokuapp.com/Project/Admin/allProducts.php](https://vap49-prod.herokuapp.com/Project/Admin/allProducts.php)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/vap49/IT202-009/pull/91](https://github.com/vap49/IT202-009/pull/91)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F7 - item 1</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/82918026/147082964-99b8ead1-1f89-49d9-a8fc-58c60e773efd.png">
+<p>Instead of adding this as a filter in the list items page, i created an entirely new page that just displays all of the products regardless of their stock or visibility modifiers. </p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr></td></tr></table>
 ### Intructions
 #### Don't delete this
 1. Pick one project type
