@@ -17,7 +17,7 @@ if (!empty($_GET["action"])) {
     switch ($_GET["action"]) {
         case "add":
             $item_id = $_GET['id'];
-            $results = add_to_cart();
+            $results = add_to_cart_func();
             foreach ($results as $item) :
                 if (se($item, "id", "", false) == $item_id) {
                     $cost = se($item, "unit_price", "", false);
